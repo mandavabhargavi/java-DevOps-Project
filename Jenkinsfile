@@ -5,15 +5,17 @@ String repository="parametrik deger"
 
 pipeline {
     agent any
-    tools{
-    maven 'Maven'
-    }
+   
     environment{
         REGISTRY = "133897766177.dkr.ecr.ap-south-1.amazonaws.com"
         Image = "sample"
      }
      stages {
-
+        stage('Build') {
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
+        }
          stage("with mvn build project") {
          steps{
                                    echo "Java VERSION"
