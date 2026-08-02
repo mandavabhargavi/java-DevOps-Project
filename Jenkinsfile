@@ -6,7 +6,7 @@ String repository="parametrik deger"
 pipeline {
     agent any
     tools{
-    maven 'Maven3'
+    maven 'Maven'
     }
     environment{
         REGISTRY = "133897766177.dkr.ecr.ap-south-1.amazonaws.com"
