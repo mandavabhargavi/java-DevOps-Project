@@ -9,8 +9,9 @@ pipeline {
     maven 'Maven3'
     }
     environment{
-    DOCKERHUB_CREDENTIALS=credentials('emirhan-dockerhub')
-    }
+        REGISTRY = "133897766177.dkr.ecr.ap-south-1.amazonaws.com"
+        Image = "sample"
+     }
      stages {
 
          stage("with mvn build project") {
@@ -28,31 +29,19 @@ pipeline {
          }
          stage("docker build image"){
          steps{
-          sh  ' docker build -f Dockerfile -t cicdjava:v1 . '
-
+          sh  ' docker build -f Dockerfile -t ${REGISTRY}/${Image}:v1 . '
+          sh 'docker tag ${REGISTRY}/${Image}:v1'
          }
 
          }
-         stage("docher hub login"){
-         steps{
-         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-           sh 'docker tag cicdjava:v1 dogandemir51/cicdjava:v1'
-         }
-         }
+       
          stage("Docker Push Image"){
          steps{
-        sh  'docker push dogandemir51/cicdjava:v1'
-
+          sh  'docker push ${REGISTRY}/${Image}:v1'
          }
 
          }
-         stage("docker delete local images"){
-         steps{
-          sh 'docker rmi -f cicdjava:v1'
-         }
-
-
-         }
+       
 
      }
 }
