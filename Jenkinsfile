@@ -5,7 +5,9 @@ String repository="parametrik deger"
 
 pipeline {
     agent any
-   
+    tools {
+        maven 'Maven-3.9'
+    }
     environment{
         REGISTRY = "133897766177.dkr.ecr.ap-south-1.amazonaws.com"
         Image = "sample"
