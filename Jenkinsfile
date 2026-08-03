@@ -39,7 +39,9 @@ pipeline {
        
          stage("Docker Push Image"){
          steps{
-          sh  'docker push ${REGISTRY}/${Image}:v1'
+          docker.withRegistry('https://133897766177.dkr.ecr.ap-south-1.amazonaws.com', 'aws-ecr-creds') {
+          docker.image('133897766177.dkr.ecr.ap-south-1.amazonaws.com/myapp:latest').push()
+            }
          }
 
          }
