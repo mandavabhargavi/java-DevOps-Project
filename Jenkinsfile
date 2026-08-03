@@ -32,7 +32,7 @@ pipeline {
          stage("docker build image"){
          steps{
           sh  ' docker build -f Dockerfile -t ${REGISTRY}/${Image}:v1 . '
-          sh 'docker tag ${REGISTRY}/${Image}:v1'
+          
          }
 
          }
