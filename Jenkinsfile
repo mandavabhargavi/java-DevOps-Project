@@ -12,7 +12,7 @@ pipeline {
     DOCKERHUB_CREDENTIALS=credentials('emirhan-dockerhub')
     }
      stages {
-
+            }
          stage("with mvn build project") {
          steps{
                                    echo "Java VERSION"
